@@ -1,0 +1,135 @@
+== About
+
+This is a simple demo about the new
+profile mechanism in spring boot 3.
+
+In spring boot 2 it was possible to
+include different profiles by one profile.
+
+In spring boot 3 we have still this option,
+but we have to introduce groups instead
+of using includes.
+
+== Setup
+
+Inside the default profile we define
+following profile groups:
+
+[ditaa]
+----
+
+/------\
+| dev  | ------> localserver, h2
+\------/
+
+/------\
+| prod | ------> prodserver, postgres, real_products 
+\------/
+
+---- 
+
+And we have the files:
+
+----
+application.yml
+application-h2.yml
+application-localserver.yml
+application-mocked_products.yml
+application-postgres.yml
+application-prodserver.yml
+application-real_products.yml
+----
+
+where we define some variables which are
+simply printed out by the demo application.
+
+
+== How to use
+
+=== Use without profile setting:
+
+[source, bash]
+----
+./gradlew bootRun
+----
+
+[source, bash]
+----
+____________________________________________________________
+Currently Spring Profiles active:
+____________________________________________________________
+
+Leads to situation:
+-server:default-value
+-database:default-value
+-products:default-value
+
+----
+
+
+=== Use with active profile "prod"
+[source, bash]
+----
+export SPRING_PROFILES_ACTIVE=prod
+./gradlew bootRun
+----
+
+leads to
+
+[source, bash]
+----
+____________________________________________________________
+Currently Spring Profiles active:prod
+____________________________________________________________
+
+Leads to situation:
+-server:prodserver
+-database:postgres
+-products:real products
+
+----
+
+
+=== Use with active profile "dev"
+[source, bash]
+----
+export SPRING_PROFILES_ACTIVE=dev
+./gradlew bootRun
+----
+
+leads to
+
+[source, bash]
+----
+____________________________________________________________
+Currently Spring Profiles active:dev
+____________________________________________________________
+
+Leads to situation:
+-server:localserver
+-database:h2
+-products:default-value
+
+----
+
+=== Use with active profile "dev,mocked_products"
+[source, bash]
+----
+export SPRING_PROFILES_ACTIVE=dev
+./gradlew bootRun
+----
+
+leads to
+
+[source, bash]
+----
+____________________________________________________________
+Currently Spring Profiles active:
+____________________________________________________________
+
+Leads to situation:
+-server:default-value
+-database:default-value
+-products:default-value
+----
+

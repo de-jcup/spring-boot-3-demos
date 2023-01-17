@@ -1,0 +1,13 @@
+spring:
+  profiles:
+     group:
+       dev: "localserver,h2"
+       prod: "prodserver,postgres,real_products"
+          
+testing:
+  profiles:
+    server: "default-value"
+    database: "default-value"
+    products: "default-value"
+    
+   
