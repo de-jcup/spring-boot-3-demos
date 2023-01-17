@@ -115,7 +115,7 @@ Leads to situation:
 === Use with active profile "dev,mocked_products"
 [source, bash]
 ----
-export SPRING_PROFILES_ACTIVE=dev
+export SPRING_PROFILES_ACTIVE=dev,mocked_products
 ./gradlew bootRun
 ----
 
@@ -124,12 +124,13 @@ leads to
 [source, bash]
 ----
 ____________________________________________________________
-Currently Spring Profiles active:
+Currently Spring Profiles active:dev,mocked_products
 ____________________________________________________________
 
 Leads to situation:
--server:default-value
--database:default-value
--products:default-value
+-server:localserver
+-database:h2
+-products:mocked products
+
 ----
 
