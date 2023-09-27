@@ -1,0 +1,22 @@
+# This configuration setup is only for local development and needs
+# a generated certificate which is never shared. Because of this
+# it is valid to define the credentials inside this file. 
+spring:
+
+  ssl:
+    bundle:
+      jks:
+        demo-self-signed:
+          key:
+            alias: "tomcat"
+          keystore:
+            # we use a keystore location which is never tracked by git. 
+            # see dev-create_localhost_certificate.sh and dev-ensure_localhost_certificate.sh
+            location: "classpath:certificates-untracked/generated-dev-localhost-keystore.p12"
+            password: "123456"
+            type: "PKCS12"
+server:
+  ssl:
+    bundle: "demo-self-signed"
+  port: 8443
+  
