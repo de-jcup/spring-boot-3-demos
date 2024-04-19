@@ -1,0 +1,21 @@
+# Cipher 2
+
+# This profile DOES NOT works:
+# Not only ciphers defined in "application.yml" are available, but all!
+  
+spring:
+  ssl:
+    bundle:
+      jks:
+        test-self-signed:
+          key:
+            alias: "tomcat"
+          keystore:
+            # we use a keystore location which is never tracked by git. 
+            # see dev-create_localhost_certificate.sh and dev-ensure_localhost_certificate.sh
+            location: "classpath:test-certificate.p12"
+            password: "123456"
+            type: "PKCS12"
+server:
+  ssl:
+    bundle: "test-self-signed"
